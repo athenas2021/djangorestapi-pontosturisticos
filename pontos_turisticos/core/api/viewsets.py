@@ -8,11 +8,21 @@ class PontoTuristicoViewSet(ModelViewSet):
     serializer_class = PontoTuristicoSerializer
 
     def get_queryset(self):
-        # Aqui, define-se que apenas pontos turiscos aprovados serao retornados
-        # pelo esta viewset
+        # Aqui, sobrescrevemos o metodo get_queryset
+        # parametrizando e filtrando
         # Necessidade de passar o basename no arquivo urls.py
-        return PontoTuristico.objects.filter(aprovado=True)
+        id = self.request.query_params.get('id',None)
+        nome = self.request.query_params.get('nome', None)
+        descricao = self.request.query_params.get('descricao', None)
+        queryset = PontoTuristico.objects.all()
+        if id:
+            queryset = PontoTuristico.objects.filter(pk=id)
+        if nome:
+            queryset.filter(pk=nome)
+        if descricao:
+            queryset.filter(pk=descricao)
 
+        return PontoTuristico.objects.filter(aprovado=True)
 
     # Aqui, define-se uma nova acao: Denunciar ponto turistico
     # Decorator @action permite que receba a um evento (get)
