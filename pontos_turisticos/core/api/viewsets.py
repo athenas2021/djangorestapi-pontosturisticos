@@ -9,6 +9,9 @@ class PontoTuristicoViewSet(ModelViewSet):
     serializer_class = PontoTuristicoSerializer
     filter_backends = (SearchFilter,)
     search_fields = ('nome','descricao')
+    
+    # Alterando lookup_field pardão do endpoint
+    lookup_field = 'nome'
 
     def get_queryset(self):
         # Aqui, sobrescrevemos o metodo get_queryset
