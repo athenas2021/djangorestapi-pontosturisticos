@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_filters',
     'core',
     'atracoes',
     'comentarios',
@@ -87,6 +88,7 @@ DATABASES = {
         'USER': 'mysqluser', 
         'PASSWORD': 'qwerty1234', 
         'HOST': 'localhost', 
+        'PORT' : '3307',
         'OPTIONS': { 
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'", 
             'charset': "utf8mb4" 
@@ -141,3 +143,8 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Definindo django-filters para todas Apis do projeto
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
