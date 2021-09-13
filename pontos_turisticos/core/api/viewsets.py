@@ -18,11 +18,11 @@ class PontoTuristicoViewSet(ModelViewSet):
         if id:
             queryset = PontoTuristico.objects.filter(pk=id)
         if nome:
-            queryset.filter(pk=nome)
+            queryset = queryset.filter(nome__iexact=nome)
         if descricao:
-            queryset.filter(pk=descricao)
+            queryset = queryset.filter(descricao__iexact=descricao)
 
-        return PontoTuristico.objects.filter(aprovado=True)
+        return queryset
 
     # Aqui, define-se uma nova acao: Denunciar ponto turistico
     # Decorator @action permite que receba a um evento (get)
