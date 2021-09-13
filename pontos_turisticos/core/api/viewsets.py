@@ -1,5 +1,7 @@
 from rest_framework.decorators import action
 from rest_framework.filters import SearchFilter
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.viewsets import ModelViewSet
 from core.models import PontoTuristico
 from .serializers import PontoTuristicoSerializer
@@ -8,8 +10,13 @@ class PontoTuristicoViewSet(ModelViewSet):
     # queryset = PontoTuristico.objects.all()
     serializer_class = PontoTuristicoSerializer
     filter_backends = (SearchFilter,)
+    # Definindo que o endpoint só será acessivel para quem estiver autenticado
+    permission_classes = (IsAuthenticated, )
+    authentication_classes = (TokenAuthentication, )
+
+    # Definindo campos search
     search_fields = ('nome','descricao')
-    
+
     # Alterando lookup_field pardão do endpoint
     lookup_field = 'nome'
 
